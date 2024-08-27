@@ -1,2 +1,2 @@
-docker-compose down
-docker-compose up --build --detach
+docker compose down
+docker compose up --build --detach
