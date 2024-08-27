@@ -14,3 +14,9 @@ Ce repot contient des outils pour récupéré les notes de Scodoc à partir de c
 Le script `main.py` gère notamment l'autentification du serveur CAS de l'université permettant par la suite de récupérer les notes de l'utilisateur.
 
 Mon objectif est de réccupérer et stocker mes notes périoquement à fin de visualiser une sorte d'historique.
+
+
+
+
+
+`docker-compose up --build`
