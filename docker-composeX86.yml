@@ -1,0 +1,37 @@
+version: '3'
+services:
+  python-app:
+    build: .
+    container_name: python-container
+    volumes:
+      - .:/app
+    command: ["./wait-for-it.sh", "mysql:3306", "--", "python", "main.py"]
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+      - TZ=Europe/Paris
+    depends_on:
+      - mysql
+    platform: linux/amd64
+
+  mysql:
+    image: mysql
+    build:
+      context: ./imageDocker/initDB/
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      TZ: Europe/Paris
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    platform: linux/amd64
+
+volumes:
+  mysql-data:
