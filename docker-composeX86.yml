@@ -33,5 +33,18 @@ services:
       - mysql-data:/var/lib/mysql
     platform: linux/amd64
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin-container
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      TZ: Europe/Paris
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    platform: linux/amd64
+
 volumes:
   mysql-data:
